@@ -1,23 +1,38 @@
 # Decentralized-Voting-System-Using-Blockchain
 
-#### The Decentralized Voting System using Ethereum Blockchain is a secure and transparent solution for conducting elections. Leveraging Ethereum's blockchain technology, this system ensures tamper-proof voting records, enabling users to cast their votes remotely while maintaining anonymity and preventing fraud. Explore this innovative project for trustworthy and decentralized voting processes.
-#### For a cool demo of this project watch this [YouTube video](https://www.youtube.com/watch?v=a5CJ70D2P-E).
-#### For more details checkout [Project Report](https://github.com/Krish-Depani/Decentralized-Voting-System-Using-Ethereum-Blockchain/blob/main/Project%20Report%20github.pdf).
-#### PS: This project is not maintained anymore.
+##Overview
+The Decentralized Voting System is a secure, transparent, and tamper-proof platform built using the Ethereum blockchain. It provides a reliable solution for conducting online voting, allowing participants to cast votes and view results without intermediaries. This system leverages the immutability of blockchain and the automation provided by smart contracts to ensure that the voting process is both efficient and trustworthy.
 
-## Features
--  Implements JWT for secure voter authentication and authorization.
--  Utilizes Ethereum blockchain for tamper-proof and transparent voting records.
--  Removes the need for intermediaries, ensuring a trustless voting process.
--  Admin panel to manage candidates, set voting dates, and monitor results.
--  Intuitive UI for voters to cast votes and view candidate information.
+##Features
+Decentralization: Eliminates intermediaries, ensuring that no single entity controls the voting process.
+Security: Votes are recorded on the blockchain, making it tamper-proof and impossible to alter.
+Transparency: All voters can verify the voting process and results in real-time.
+Accessibility: Voters can cast their votes from anywhere with internet access, increasing voter participation.
+Cost-Effective: Reduces the cost of conducting elections by eliminating the need for physical polling stations and human resources.
+Real-Time Results: Voting results are automatically updated in real-time as votes are cast.
 
-## Requirements
-- Node.js (version – 18.14.0)
-- Metamask
-- Python (version – 3.9)
-- FastAPI
-- MySQL Database (port – 3306)
+##System Architecture
+The system is designed using the Ethereum blockchain and smart contracts. Key components include:
+Voter Module: Allows users to authenticate securely, cast their votes, and verify their vote status.
+Admin Module: Allows administrators to manage the voting process, including adding candidates, setting voting dates, and overseeing the results.
+Blockchain Integration: Ensures secure, immutable recording of votes.
+Frontend: Provides a user-friendly interface for both voters and administrators.
+Backend: Handles authentication, database management, and interaction with the blockchain.
+High-Level System Flow:
+Voters log in with credentials.
+Admin sets up the election by adding candidates and defining dates.
+Voters cast their votes, and the transaction is recorded on the blockchain.
+The voting page is updated with real-time votes and results.
+
+##Technologies Used
+Ethereum Blockchain: For secure and immutable vote recording.
+Smart Contracts (Solidity): For automating the voting process.
+Web3.js: To interact with the Ethereum blockchain.
+Node.js: For backend services and handling server requests.
+FastAPI: For building secure and fast backend APIs.
+MySQL: For database management.
+Metamask: To connect to the Ethereum blockchain and manage transactions.
+Ganache: For local blockchain testing and development.
 
 ## Screenshots
 
@@ -29,88 +44,58 @@
 
 ## Installation
 
-1. Open a terminal.
+Clone the repository:
+git clone <repository-url>
 
-2. Clone the repository by using the command
-        
-        git clone https://github.com/Krish-Depani/Decentralized-Voting-System-Using-Ethereum-Blockchain.git
+Install Dependencies: Navigate to the project directory and install the required dependencies.
+npm install
 
-3. Download and install [Ganache](https://trufflesuite.com/ganache/).
+Set up Environment Variables: 
+Configure environment variables (e.g., for MySQL, FastAPI, and Ethereum). 
+Create a .env file in the root directory:
+makefile
+MYSQL_USER=<your-mysql-username>
+MYSQL_PASSWORD=<your-mysql-password>
+MYSQL_HOST=<your-mysql-host>
+MYSQL_DB=<your-mysql-database>
+SECRET_KEY=<your-secret-key>
 
-4. Create a workspace named <b>developement</b>, in the truffle projects section add `truffle-config.js` by clicking `ADD PROJECT` button.
+Run the Local Blockchain:
+Start Ganache to create a local Ethereum blockchain environment.
 
-5. Download [Metamask](https://metamask.io/download/) extension for the browser.
+Deploy the smart contracts using Truffle:
+truffle migrate --reset
 
-6. Now create wallet (if you don't have one), then import accounts from ganache.
+Run the Backend: Start the FastAPI server.
+uvicorn main:app --reload
 
-7. Add network to the metamask. ( Network name - Localhost 7575, RPC URl - http://localhost:7545, Chain ID - 1337, Currency symbol - ETH)
+Run the Frontend: Start the frontend development server:
+npm start
 
-8. Open MySQL and create database named <b>voter_db</b>. (DON'T USE XAMPP)
+Access the Application:
+Open your browser and navigate to http://localhost:8080 for the voting portal.
+Usage
 
-9. In the database created, create new table named <b>voters</b> in the given format and add some values.
+Admin:
+Log in using admin credentials.
+Add candidates, define the voting period, and monitor the voting process.
 
-           CREATE TABLE voters (
-           voter_id VARCHAR(36) PRIMARY KEY NOT NULL,
-           role ENUM('admin', 'user') NOT NULL,
-           password VARCHAR(255) NOT NULL
-           );
-   <br>
+Voter:
+Log in using voter credentials.
+View candidates and cast your vote during the voting period.
 
-        +--------------------------------------+-------+-----------+
-        | voter_id                             | role  | password  |
-        +--------------------------------------+-------+-----------+
-        |                                      |       |           |
-        +--------------------------------------+-------+-----------+
+Testing
+The project includes comprehensive testing to ensure the integrity of the voting process:
 
-12. Install truffle globally
-    
-        npm install -g truffle
+Unit Testing: Tests individual components like login, vote casting, and candidate registration.
+Functional Testing: Verifies that users can log in, vote, and view results correctly.
+Integration Testing: Ensures all modules work together seamlessly.
+Future Enhancements
 
-14. Go to the root directory of repo and install node modules
-
-        npm install
-
-15. Install python dependencies
-
-        pip install fastapi mysql-connector-python pydantic python-dotenv uvicorn uvicorn[standard] PyJWT
-
-## Usage
-
-#### Note: Update the database credentials in the `./Database_API/.env` file.
-
-1. Open terminal at the project directory
-
-2. Open Ganache and it's <b>development</b> workspace.
-
-3. open terminal in project's root directory and run the command
-
-        truffle console
-   then compile the smart contracts with command
-
-        compile
-   exit the truffle console
-
-5. Bundle app.js with browserify
-    
-        browserify ./src/js/app.js -o ./src/dist/app.bundle.js
-
-2. Start the node server server
-    
-        node index.js
-
-3. Navigate to `Database_API` folder in another terminal
-    
-        cd Database_API
-    then start the database server by following command
-
-        uvicorn main:app --reload --host 127.0.0.1
-
-4. In a new terminal migrate the truffle contract to local blockchain
-    
-        truffle migrate
-
-You're all set! The Voting app should be up and running now at http://localhost:8080/.<br>
-For more info about usage checkout [YouTube video](https://www.youtube.com/watch?v=a5CJ70D2P-E).
+In future versions, we plan to:
+Implement real-time vote counting and secure voter identification mechanisms.
+Add support for advanced data analytics and AI to provide insights into voter behavior.
+Integrate with biometric technologies for enhanced voter authentication.
 
 ## Code Structure
 
@@ -155,7 +140,7 @@ For more info about usage checkout [YouTube video](https://www.youtube.com/watch
 
 ## License
 
-The code in this repository is licensed under the MIT License. This means that you are free to use, modify, and distribute the code, as long as you include the original copyright and license notice. For more information about LICENSE please click [here](https://github.com/Krish-Depani/Decentralized-Voting-System-Using-Ethereum-Blockchain/blob/main/LICENSE).
+The code in this repository is licensed under the MIT License.
 
 ## If you like this project, please give it a 🌟.
 ## Thank you 😊.
